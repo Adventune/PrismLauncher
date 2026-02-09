@@ -17,7 +17,6 @@
  */
 
 #include "ListModel.h"
-#include <qfileinfo.h>
 #include <QDir>
 #include <QDirIterator>
 #include <QFileInfo>
@@ -55,7 +54,7 @@ QString getDynamicPath()
         auto doc = Json::requireDocument(FS::read(settingsPath));
         return Json::requireString(Json::requireObject(doc), "instanceLocation");
     } catch (const Exception& e) {
-        qCritical() << "Could not read ftb settings file: " << e.cause();
+        qCritical() << "Could not read ftb settings file:" << e.cause();
     }
     return {};
 }

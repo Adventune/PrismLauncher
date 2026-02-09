@@ -91,12 +91,12 @@ class IconProxy : public QIdentityProxyModel {
             if (!var.isNull()) {
                 auto string = var.toString();
                 if (string == "warning") {
-                    return APPLICATION->getThemedIcon("status-yellow");
+                    return QIcon::fromTheme("status-yellow");
                 } else if (string == "error") {
-                    return APPLICATION->getThemedIcon("status-bad");
+                    return QIcon::fromTheme("status-bad");
                 }
             }
-            return APPLICATION->getThemedIcon("status-good");
+            return QIcon::fromTheme("status-good");
         }
         return var;
     }
@@ -151,7 +151,7 @@ VersionPage::VersionPage(MinecraftInstance* inst, QWidget* parent) : QMainWindow
     reloadPackProfile();
 
     auto proxy = new IconProxy(ui->packageView);
-    proxy->setSourceModel(m_profile.get());
+    proxy->setSourceModel(m_profile);
 
     m_filterModel = new QSortFilterProxyModel(this);
     m_filterModel->setDynamicSortFilter(true);
@@ -168,7 +168,7 @@ VersionPage::VersionPage(MinecraftInstance* inst, QWidget* parent) : QMainWindow
     auto smodel = ui->packageView->selectionModel();
     connect(smodel, &QItemSelectionModel::currentChanged, this, &VersionPage::versionCurrent);
     connect(smodel, &QItemSelectionModel::currentChanged, this, &VersionPage::packageCurrent);
-    connect(m_profile.get(), &PackProfile::minecraftChanged, this, &VersionPage::updateVersionControls);
+    connect(m_profile, &PackProfile::minecraftChanged, this, &VersionPage::updateVersionControls);
     updateVersionControls();
     preselect(0);
     connect(ui->packageView, &ModListView::customContextMenuRequested, this, &VersionPage::showContextMenu);

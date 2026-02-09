@@ -71,7 +71,7 @@ QVariant Technic::ListModel::data(const QModelIndex& index, int role) const
             if (m_logoMap.contains(pack.logoName)) {
                 return (m_logoMap.value(pack.logoName));
             }
-            QIcon icon = APPLICATION->getThemedIcon("screenshot-placeholder");
+            QIcon icon = QIcon::fromTheme("screenshot-placeholder");
             ((ListModel*)this)->requestLogo(pack.logoName, pack.logoUrl);
             return icon;
         }
@@ -156,7 +156,7 @@ void Technic::ListModel::performSearch()
     if (!clientId.isEmpty()) {
         searchUrl += "?cid=" + clientId;
     }
-    netJob->addNetAction(Net::ApiDownload::makeByteArray(QUrl(searchUrl), response));
+    netJob->addNetAction(Net::ApiDownload::makeByteArray(QUrl(searchUrl), response.get()));
     jobPtr = netJob;
     jobPtr->start();
     connect(netJob.get(), &NetJob::succeeded, this, &ListModel::searchRequestFinished);
@@ -170,8 +170,8 @@ void Technic::ListModel::searchRequestFinished()
     QJsonParseError parse_error;
     QJsonDocument doc = QJsonDocument::fromJson(*response, &parse_error);
     if (parse_error.error != QJsonParseError::NoError) {
-        qWarning() << "Error while parsing JSON response from Technic at " << parse_error.offset
-                   << " reason: " << parse_error.errorString();
+        qWarning() << "Error while parsing JSON response from Technic at" << parse_error.offset
+                   << "reason:" << parse_error.errorString();
         qWarning() << *response;
         return;
     }
@@ -191,7 +191,7 @@ void Technic::ListModel::searchRequestFinished()
                     if (pack.slug == "vanilla")
                         continue;
 
-                    auto rawURL = Json::ensureString(technicPackObject, "iconUrl", "null");
+                    auto rawURL = technicPackObject["iconUrl"].toString("null");
                     if (rawURL == "null") {
                         pack.logoUrl = "null";
                         pack.logoName = "null";

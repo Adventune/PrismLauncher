@@ -18,41 +18,21 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1751011381,
-        "narHash": "sha256-krGXKxvkBhnrSC/kGBmg5MyupUUT5R6IBCLEzx9jhMM=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "30e2e2857ba47844aa71991daa6ed1fc678bcbb7",
-        "type": "github"
+        "lastModified": 1769598131,
+        "narHash": "sha256-kzEnMXuhOsr6tE6QvuTvdolZ3VqnOMzU8EOTGXsP9RU=",
+        "rev": "fa83fd837f3098e3e678e6cf017b2b36102c7211",
+        "type": "tarball",
+        "url": "https://releases.nixos.org/nixos/25.11/nixos-25.11.4882.fa83fd837f30/nixexprs.tar.xz"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "qrcodegenerator": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1737616857,
-        "narHash": "sha256-6SugPt0lp1Gz7nV23FLmsmpfzgFItkSw7jpGftsDPWc=",
-        "owner": "nayuki",
-        "repo": "QR-Code-generator",
-        "rev": "2c9044de6b049ca25cb3cd1649ed7e27aa055138",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nayuki",
-        "repo": "QR-Code-generator",
-        "type": "github"
+        "type": "tarball",
+        "url": "https://channels.nixos.org/nixos-25.11/nixexprs.tar.xz"
       }
     },
     "root": {
       "inputs": {
         "libnbtplusplus": "libnbtplusplus",
-        "nixpkgs": "nixpkgs",
-        "qrcodegenerator": "qrcodegenerator"
+        "nixpkgs": "nixpkgs"
       }
     }
   },
